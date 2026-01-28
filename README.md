@@ -157,7 +157,7 @@ const RPC_ENDPOINTS = [
 
 ## 🎬 演示视频
 
-查看完整功能演示：[黑客松视频逐字稿](./黑客松视频逐字稿.md)
+查看完整功能演示：[项目演示视频]solana-alpha-scanner项目演示.mov
 
 ---
 
@@ -169,7 +169,6 @@ Solana-Alpha-Scanner/
 ├── README.md               # 项目说明文档
 ├── LICENSE                 # MIT 许可证
 ├── .gitignore             # Git 忽略配置
-├── 黑客松视频逐字稿.md      # 项目演示脚本
 ├── docs/                   # 文档资源
 │   ├── opening-frame.html          # 视频开场静帧
 │   ├── slide-1-smart-scanning.html # 核心能力1展示页
