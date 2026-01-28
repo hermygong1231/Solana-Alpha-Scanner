@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1920, height=1080">
+    <title>核心能力 2 - Alpha评分</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 1920px;
+            height: 1080px;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .grid-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(153, 69, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(153, 69, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(153, 69, 255, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(100px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 1600px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .number {
+            font-size: 120px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #9945ff 0%, #14f195 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        .title {
+            font-size: 96px;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .icon {
+            font-size: 100px;
+            filter: drop-shadow(0 0 30px rgba(153, 69, 255, 0.5));
+        }
+
+        .divider {
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, #9945ff, transparent);
+            margin-bottom: 60px;
+        }
+
+        .content {
+            display: flex;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .left-section {
+            flex: 1;
+        }
+
+        .score-display {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 50px;
+            animation: slideInLeft 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9945ff 0%, #14f195 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 72px;
+            font-weight: 900;
+            color: #ffffff;
+            box-shadow: 0 0 60px rgba(153, 69, 255, 0.5);
+        }
+
+        .score-range {
+            font-size: 48px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .algorithm-text {
+            font-size: 36px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            animation: slideInLeft 0.8s ease-out 0.5s both;
+        }
+
+        .right-section {
+            flex: 1;
+        }
+
+        .recommendations {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .rec-item {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            padding: 30px 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            animation: slideInRight 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .rec-item:nth-child(1) { 
+            background: rgba(20, 241, 149, 0.1);
+            border: 2px solid rgba(20, 241, 149, 0.3);
+            animation-delay: 0.4s;
+        }
+        .rec-item:nth-child(2) { 
+            background: rgba(255, 193, 7, 0.1);
+            border: 2px solid rgba(255, 193, 7, 0.3);
+            animation-delay: 0.6s;
+        }
+        .rec-item:nth-child(3) { 
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+            animation-delay: 0.8s;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .rec-badge {
+            font-size: 42px;
+            font-weight: 900;
+            padding: 15px 30px;
+            border-radius: 12px;
+        }
+
+        .rec-item:nth-child(1) .rec-badge {
+            background: #14f195;
+            color: #0a0a0a;
+        }
+
+        .rec-item:nth-child(2) .rec-badge {
+            background: #ffc107;
+            color: #0a0a0a;
+        }
+
+        .rec-item:nth-child(3) .rec-badge {
+            background: #ef4444;
+            color: #ffffff;
+        }
+
+        .rec-desc {
+            font-size: 32px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .badge {
+            position: absolute;
+            top: 80px;
+            right: 80px;
+            padding: 20px 40px;
+            background: rgba(153, 69, 255, 0.1);
+            border: 2px solid rgba(153, 69, 255, 0.3);
+            border-radius: 50px;
+            color: #9945ff;
+            font-size: 28px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="glow"></div>
+
+    <div class="badge">核心能力 2/3</div>
+
+    <div class="container">
+        <div class="number">02</div>
+        <div class="title">
+            <span class="icon">🧠</span>
+            <span>Alpha评分</span>
+        </div>
+        <div class="divider"></div>
+
+        <div class="content">
+            <div class="left-section">
+                <div class="score-display">
+                    <div class="score-circle">85</div>
+                    <div class="score-range">0-100<br>综合评分</div>
+                </div>
+
+                <div class="algorithm-text">
+                    通过<strong style="color: #9945ff;">多维度算法</strong>分析<br>
+                    自动生成投资评分<br>
+                    给出明确决策建议
+                </div>
+            </div>
+
+            <div class="right-section">
+                <div class="recommendations">
+                    <div class="rec-item">
+                        <div class="rec-badge">BUY</div>
+                        <div class="rec-desc">高潜力 Alpha 机会</div>
+                    </div>
+
+                    <div class="rec-item">
+                        <div class="rec-badge">HOLD</div>
+                        <div class="rec-desc">中等风险，观望等待</div>
+                    </div>
+
+                    <div class="rec-item">
+                        <div class="rec-badge">AVOID</div>
+                        <div class="rec-desc">高风险，建议避免</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
